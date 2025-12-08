@@ -10,6 +10,13 @@ class TaskItem extends Component
     public $listId;
     public $tasks;
 
+    protected $listeners = ['task-added' => 'refreshTasks'];
+
+    public function refreshTasks()
+    {
+        $this->tasks = TodoItem::where('todo_list_id', $this->listId)->get();
+    }
+
     public function mount($listId)
     {
         $this->listId = $listId; 
